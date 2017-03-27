@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FF444444"
+    android:id="@+id/frame">
+ <TextView
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:id="@+id/level"
+     android:text="LEVEL N"
+     android:layout_centerHorizontal="true"
+     android:layout_centerVertical="true"
+     android:textSize="48dp"
+     />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/level"
+        android:layout_centerHorizontal="true"
+        android:text="Start"
+        />
+</RelativeLayout>

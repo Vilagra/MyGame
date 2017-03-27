@@ -1,0 +1,4 @@
+#Sat Mar 25 18:19:50 EET 2017
+base.0=C\:\\Project\\Check\\ModernArtUi2\\Lab7_GraphicsLab\\app\\build\\intermediates\\transforms\\dex\\androidTest\\debug\\folders\\1000\\1f\\main
+renamed.0=classes.dex
+file.0=C\:\\Project\\Check\\ModernArtUi2\\Lab7_GraphicsLab\\app\\build\\intermediates\\transforms\\dex\\androidTest\\debug\\folders\\1000\\1f\\main\\classes.dex
