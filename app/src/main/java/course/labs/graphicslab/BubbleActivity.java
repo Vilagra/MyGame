@@ -73,15 +73,14 @@ public class BubbleActivity extends Activity implements View.OnClickListener {
 
 
         // Load basic bubble Bitmap
-        bitmaps[0] = BitmapFactory.decodeResource(getResources(), R.drawable.lena);
-        bitmaps[1] = BitmapFactory.decodeResource(getResources(), R.drawable.artur);
-        bitmaps[2] = BitmapFactory.decodeResource(getResources(), R.drawable.sveta);
-        bitmaps[3] = BitmapFactory.decodeResource(getResources(), R.drawable.belik);
-        bitmaps[4] = BitmapFactory.decodeResource(getResources(), R.drawable.oleg);
+        bitmaps[0] = BitmapFactory.decodeResource(getResources(), R.drawable.belik);
+        bitmaps[1] = BitmapFactory.decodeResource(getResources(), R.drawable.roman);
+        bitmaps[2] = BitmapFactory.decodeResource(getResources(), R.drawable.levenko);
+        bitmaps[3] = BitmapFactory.decodeResource(getResources(), R.drawable.oleg);
+        bitmaps[4] = BitmapFactory.decodeResource(getResources(), R.drawable.djonni);
         bitmaps[5] = BitmapFactory.decodeResource(getResources(), R.drawable.jana);
-        bitmaps[6] = BitmapFactory.decodeResource(getResources(), R.drawable.djonni);
-        bitmaps[7] = BitmapFactory.decodeResource(getResources(), R.drawable.roman);
-        bitmaps[8] = BitmapFactory.decodeResource(getResources(), R.drawable.levenko);
+        bitmaps[6] = BitmapFactory.decodeResource(getResources(), R.drawable.sveta);
+        bitmaps[7] = BitmapFactory.decodeResource(getResources(), R.drawable.lena);
 
     }
 
@@ -151,7 +150,7 @@ public class BubbleActivity extends Activity implements View.OnClickListener {
                         for (int i = 0; i < mFrame.getChildCount(); i++) {
                             if (mFrame.getChildAt(i).getClass() == BubbleView.class) {
                                 BubbleView buble = (BubbleView) mFrame.getChildAt(i);
-                                if (buble.intersects(x, y)) {
+                                if (buble.intersects(x, y)&&buble.type==Type.WOMEN) {
                                     buble.deflect(velocityX, velocityY);
                                     return true;
                                 }
@@ -177,7 +176,7 @@ public class BubbleActivity extends Activity implements View.OnClickListener {
                         for (int i = 0; i < mFrame.getChildCount(); i++) {
                             if (mFrame.getChildAt(i).getClass() == BubbleView.class) {
                                 BubbleView buble = (BubbleView) mFrame.getChildAt(i);
-                                if (buble.intersects(x, y)) {
+                                if (buble.intersects(x, y)&&buble.type==Type.MEN) {
                                     buble.stop(true);
                                     return true;
                                 }
@@ -221,8 +220,8 @@ public class BubbleActivity extends Activity implements View.OnClickListener {
         mCreator = executor.scheduleWithFixedDelay(new Runnable() {
             @Override
             public void run() {
-                final int x = r.nextInt(mDisplayWidth - 80) + 40;
-                final int y = r.nextInt(mDisplayHeight - 80) + 40;
+                final int x = r.nextInt(mDisplayWidth - 188) + 60;
+                final int y = r.nextInt(mDisplayHeight - 188) + 60;
                 new BubbleView(getApplicationContext(), x, y);
                 mFrame.post(new Runnable() {
                     @Override
@@ -233,15 +232,18 @@ public class BubbleActivity extends Activity implements View.OnClickListener {
                     }
                 });
             }
-        }, 0, 1000, TimeUnit.MILLISECONDS);
+        }, 0, 750, TimeUnit.MILLISECONDS);
     }
 
     // BubbleView is a View that displays a bubble.
     // This class handles animating, drawing, and popping amongst other actions.
-    // A new BubbleView is created for each bubble on the display
+    // A new BubbleView is created for each bubble on the displa
+    enum Type{
+        MEN,WOMEN,BELIK
+    }
 
     public class BubbleView extends View {
-
+        private Type type;
         private static final int BITMAP_SIZE = 64;
         private static final int REFRESH_RATE = 40;
         private final Paint mPainter = new Paint();
@@ -256,29 +258,22 @@ public class BubbleActivity extends Activity implements View.OnClickListener {
 
         BubbleView(Context context, float x, float y) {
             super(context);
-
+            this.type=type;
             // Create a new random number generator to
             // randomize size, rotation, speed and direction
             Random r = new Random();
-
             // Creates the bubble bitmap for this BubbleView
             createScaledBitmap(r);
-
             // Radius of the Bitmap
             mRadiusAdj = mRadius + 20;
-
             // Adjust position to center the bubble under user's finger
             mXPos = x;
             mYPos = y;
-
             // Set the BubbleView's speed and direction
             setSpeedAndDirection(r);
-
             // Set the BubbleView's rotation
             setRotation(r);
-
             mPainter.setAntiAlias(true);
-
         }
 
         private void setRotation(Random r) {
@@ -289,16 +284,27 @@ public class BubbleActivity extends Activity implements View.OnClickListener {
             // TODO - Set movement direction and speed
             // Limit movement speed in the x and y
             // direction to [-3..3] pixels per movement.
-            mDx = (r.nextInt(3) + 1) * (r.nextInt(2) == 1 ? 1 : -1);
-            mDy = (r.nextInt(3) + 1) * (r.nextInt(2) == 1 ? 1 : -1);
+            mDx =  2* (r.nextInt(2) == 1 ? 1 : -1);
+            mDy = 2 * (r.nextInt(2) == 1 ? 1 : -1);
 
         }
 
         private void createScaledBitmap(Random r) {
             mScaledBitmapWidth = BITMAP_SIZE * (r.nextInt(2) + 2);
-
+            int rand = r.nextInt(8);
+            switch (rand){
+                case 0:
+                    type=Type.MEN;
+                    break;
+                case 1:case 2:case 3:case 4:
+                    type=Type.MEN;
+                    break;
+                default:
+                    type=Type.WOMEN;
+                    break;
+            }
             // TODO - create the scaled bitmap using size set above
-            mScaledBitmap = Bitmap.createScaledBitmap(bitmaps[r.nextInt(9)], mScaledBitmapWidth, mScaledBitmapWidth, false);
+            mScaledBitmap = Bitmap.createScaledBitmap(bitmaps[rand], mScaledBitmapWidth, mScaledBitmapWidth, false);
         }
 
         // Start moving the BubbleView & updating the display
