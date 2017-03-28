@@ -19,5 +19,6 @@
         android:layout_below="@+id/level"
         android:layout_centerHorizontal="true"
         android:text="Start"
+        android:id="@+id/start"
         />
 </RelativeLayout>

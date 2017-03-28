@@ -26,10 +26,11 @@ public final class R {
     public static final class id {
         public static final int frame=0x7f070000;
         public static final int level=0x7f070001;
-        public static final int menu_random_mode=0x7f070004;
-        public static final int menu_single_speed=0x7f070003;
-        public static final int menu_still_mode=0x7f070002;
-        public static final int quit=0x7f070005;
+        public static final int menu_random_mode=0x7f070005;
+        public static final int menu_single_speed=0x7f070004;
+        public static final int menu_still_mode=0x7f070003;
+        public static final int quit=0x7f070006;
+        public static final int start=0x7f070002;
     }
     public static final class layout {
         public static final int main=0x7f030000;

@@ -1,4 +1,4 @@
-#Sun Mar 26 00:34:59 EET 2017
-base.0=C\:\\Project\\Check\\ModernArtUi2\\Lab7_GraphicsLab\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
+#Tue Mar 28 17:21:14 EEST 2017
+base.0=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
 renamed.0=classes.dex
-file.0=C\:\\Project\\Check\\ModernArtUi2\\Lab7_GraphicsLab\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex
+file.0=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex
