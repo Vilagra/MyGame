@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="yellow">#ffff00</color>
     <string name="app_name">GraphicsLab</string>
+    <string name="level">LEVEL: </string>
+    <string name="missed">Missed: </string>
     <string name="quit_string">Quit</string>
     <string name="random_speed_mode_string">Random Speed Mode</string>
+    <string name="score">Score: </string>
     <string name="single_speed_mode_string">Single Speed Mode</string>
     <string name="still_mode_string">Still Mode</string>
 </resources>

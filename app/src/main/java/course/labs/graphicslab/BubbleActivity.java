@@ -7,36 +7,40 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class BubbleActivity extends Activity implements View.OnClickListener,BubbleView.BubleViewListener {
+public class BubbleActivity extends Activity implements View.OnClickListener, BubbleView.BubleViewListener {
 
     // These variables are for testing purposes, do not modify
 
     //private static int speedMode = RANDOM;
-    int level = 1;
+    LogicOfGame logicOfGame;
 
 
     // The Main view
     private RelativeLayout mFrame;
-    private TextView mTextView;
+    private TextView levelTextView;
+    private TextView scoreTextView;
+    private ImageView imageView1;
+    private ImageView imageView2;
+    private ImageView imageView3;
     private Button mButton;
+
+    String stringForScore;
+    String stringForMissed;
+    String stringForLevel;
 
     private ScheduledFuture<?> mCreator;
 
@@ -48,6 +52,9 @@ public class BubbleActivity extends Activity implements View.OnClickListener,Bub
     private int mSoundPop;
     private int mSoundMissed;
     private int mSoundFlink;
+    private int mSoundLoose;
+    private int mSoundWin;
+    private int mSoundBelik;
     // Audio volume
     private float mStreamVolume;
 
@@ -57,18 +64,27 @@ public class BubbleActivity extends Activity implements View.OnClickListener,Bub
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.main);
         Data.initialize(getApplicationContext());
+        logicOfGame = LogicOfGame.getLogicOfGame();
         // Set up user interface
         mFrame = (RelativeLayout) findViewById(R.id.frame);
-        mTextView = (TextView) findViewById(R.id.level);
+        levelTextView = (TextView) findViewById(R.id.level);
+        scoreTextView = (TextView) findViewById(R.id.score);
+        imageView1= (ImageView) findViewById(R.id.missed1);
+        imageView2= (ImageView) findViewById(R.id.missed2);
+        imageView3= (ImageView) findViewById(R.id.missed3);
         mButton = (Button) findViewById(R.id.start);
         mButton.setOnClickListener(this);
+        stringForLevel = getString(R.string.level);
+        stringForMissed = getString(R.string.missed);
+        stringForScore = getString(R.string.score);
+        updateView();
         // Load basic bubble Bitmap
 
 
     }
+
 
     @Override
     protected void onResume() {
@@ -94,7 +110,19 @@ public class BubbleActivity extends Activity implements View.OnClickListener,Bub
         mSoundPop = mSoundPool.load(getApplicationContext(), R.raw.bubble_pop, 1);
         mSoundMissed = mSoundPool.load(getApplicationContext(), R.raw.oyo, 1);
         mSoundFlink = mSoundPool.load(getApplicationContext(), R.raw.yohoo, 1);
+        mSoundLoose = mSoundPool.load(getApplicationContext(), R.raw.uauauauaaa, 1);
+        mSoundWin = mSoundPool.load(getApplicationContext(), R.raw.harosh, 1);
+        mSoundBelik = mSoundPool.load(getApplicationContext(), R.raw.suchka, 1);
 
+    }
+
+    private void updateView(){
+        levelTextView.setText(stringForLevel + " "+logicOfGame.getCurrentLevel());
+        scoreTextView.setText(stringForScore + " "+logicOfGame.getScore());
+        imageView1.setVisibility(View.VISIBLE);
+        imageView2.setVisibility(View.VISIBLE);
+        imageView3.setVisibility(View.VISIBLE);
+        //missedTextView.setText(stringForMissed + " "+logicOfGame.getMissed());
     }
 
     @Override
@@ -123,16 +151,18 @@ public class BubbleActivity extends Activity implements View.OnClickListener,Bub
                         for (int i = 0; i < mFrame.getChildCount(); i++) {
                             if (mFrame.getChildAt(i).getClass() == BubbleView.class) {
                                 BubbleView buble = (BubbleView) mFrame.getChildAt(i);
-                                if (buble.intersects(x, y)&&buble.getType()==Type.WOMEN) {
+                                if (buble.intersects(x, y) && buble.getType() == Type.WOMEN) {
+                                    buble.setTypeOfRemove(BubbleView.TypeOfRemove.FLINK);
                                     buble.deflect(velocityX, velocityY);
                                     return true;
                                 }
                             }
 
                         }
-                        return false;
+                        return true;
 
                     }
+
                     @Override
                     public boolean onSingleTapConfirmed(MotionEvent event) {
 
@@ -144,15 +174,36 @@ public class BubbleActivity extends Activity implements View.OnClickListener,Bub
                         for (int i = 0; i < mFrame.getChildCount(); i++) {
                             if (mFrame.getChildAt(i).getClass() == BubbleView.class) {
                                 BubbleView buble = (BubbleView) mFrame.getChildAt(i);
-                                if (buble.intersects(x, y)&&buble.getType()==Type.MEN) {
-                                    buble.stop(true);
+                                if (buble.intersects(x, y) && buble.getType() == Type.MEN) {
+                                    buble.setTypeOfRemove(BubbleView.TypeOfRemove.TOUCH);
+                                    buble.stop();
                                     return true;
                                 }
                             }
                         }
                         return true;
                     }
-                });
+
+                    @Override
+                    public boolean onDoubleTap(MotionEvent e) {
+                        float x = e.getX();
+                        float y = e.getY();
+                        for (int i = 0; i < mFrame.getChildCount(); i++) {
+                            if (mFrame.getChildAt(i).getClass() == BubbleView.class) {
+                                BubbleView buble = (BubbleView) mFrame.getChildAt(i);
+                                if (buble.intersects(x, y) && buble.getType() == Type.BELIK) {
+                                    buble.setTypeOfRemove(BubbleView.TypeOfRemove.DOUBLETOUCH);
+                                    buble.stop();
+                                    return true;
+                                }
+                            }
+                        }
+                        return true;
+                    }
+                }
+
+        );
+
     }
 
     @Override
@@ -164,7 +215,6 @@ public class BubbleActivity extends Activity implements View.OnClickListener,Bub
 
     @Override
     protected void onPause() {
-
         mSoundPool.release();
         super.onPause();
     }
@@ -172,7 +222,7 @@ public class BubbleActivity extends Activity implements View.OnClickListener,Bub
     @Override
     public void onClick(View v) {
         mButton.setVisibility(View.GONE);
-        mTextView.setVisibility(View.GONE);
+        levelTextView.setVisibility(View.GONE);
         ScheduledExecutorService executor = Executors
                 .newScheduledThreadPool(1);
         final Random r = new Random();
@@ -191,32 +241,130 @@ public class BubbleActivity extends Activity implements View.OnClickListener,Bub
                     }
                 });
             }
-        }, 0, 750, TimeUnit.MILLISECONDS);
+        }, 0, 1000 - logicOfGame.speed, TimeUnit.MILLISECONDS);
     }
 
     @Override
-    public void removeView(final BubbleView bubbleView, final boolean wasFlink, final boolean wasPopped) {
+    public void handleViewRomoving(final BubbleView bubbleView, final BubbleView.TypeOfRemove typeOfRemove) {
         mFrame.post(new Runnable() {
             @Override
             public void run() {
                 mFrame.removeView(bubbleView);
-                if (wasPopped) {
-                    mSoundPool.play(mSoundPop, 0.5f, 0.5f, 0, 0, 1.0f);
-                } else if (wasFlink) {
-                    mSoundPool.play(mSoundFlink, 0.5f, 0.5f, 0, 0, 1.0f);
-                } else {
-                    mSoundPool.play(mSoundMissed, 0.5f, 0.5f, 0, 0, 1.0f);
+                setSoundAndText(typeOfRemove);
+                if (logicOfGame.getResult() != null) {
+                    if (null != mCreator && !mCreator.isDone()) {
+                        stopGame();
+                    }
                 }
+
             }
         });
+    }
+
+    private void setSoundAndText(BubbleView.TypeOfRemove typeOfRemove) {
+        switch (typeOfRemove) {
+            case TOUCH:
+                mSoundPool.play(mSoundPop, 0.5f, 0.5f, 0, 0, 1.0f);
+                logicOfGame.increaseScore(2);
+                scoreTextView.setText(stringForScore +" "+ logicOfGame.getScore());
+                break;
+            case FLINK:
+                mSoundPool.play(mSoundFlink, 0.5f, 0.5f, 0, 0, 1.0f);
+                logicOfGame.increaseScore(3);
+                scoreTextView.setText(stringForScore + " "+logicOfGame.getScore());
+                break;
+            case MISSED:
+                mSoundPool.play(mSoundMissed, 0.5f, 0.5f, 0, 0, 1.0f);
+                logicOfGame.increaseMissed();
+                switch (logicOfGame.getMissed()){
+                    case 1:
+                        imageView1.setVisibility(View.INVISIBLE);
+                        break;
+                    case 2:
+                        imageView2.setVisibility(View.INVISIBLE);
+                        break;
+                    case 3:
+                        imageView3.setVisibility(View.INVISIBLE);
+                        break;
+                }
+                break;
+            case DOUBLETOUCH:
+                mSoundPool.play(mSoundBelik, 0.5f, 0.5f, 0, 0, 1.0f);
+                logicOfGame.increaseScore(4);
+                scoreTextView.setText(stringForScore + " "+logicOfGame.getScore());
+                break;
+        }
+    }
+
+
+    private void stopGame() {
+        if (null != mCreator && !mCreator.isDone()) {
+            mCreator.cancel(true);
+        }
+        stopView();
+        if (logicOfGame.getResult() == LogicOfGame.Result.WIN) {
+            mSoundPool.play(mSoundWin, 0.5f, 0.5f, 0, 0, 1.0f);
+            logicOfGame.resetForNextLevel();
+            logicOfGame.increaseLevel();
+            mButton.setVisibility(View.VISIBLE);
+            levelTextView.setVisibility(View.VISIBLE);
+            levelTextView.setText(stringForLevel + " " + logicOfGame.getCurrentLevel());
+            cleanFrame();
+            updateView();
+        }
+        if (logicOfGame.getResult() == LogicOfGame.Result.LOSE) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("LOOSER !!!").
+                    setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            cleanFrame();
+                            logicOfGame.resetForNewGame();
+                            mButton.setVisibility(View.VISIBLE);
+                            levelTextView.setVisibility(View.VISIBLE);
+                            updateView();
+                        }
+                    }).
+                    setIcon(getResources().getDrawable(R.drawable.belik)).
+                    setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+            mSoundPool.play(mSoundLoose, 0.5f, 0.5f, 0, 0, 1.0f);
+            builder.create().show();
+        }
+    }
+
+    private void stopView() {
+        for (int i = 0; i < mFrame.getChildCount(); i++) {
+            int j = mFrame.getChildCount();
+            if (mFrame.getChildAt(i).getClass() == BubbleView.class) {
+                final BubbleView buble = (BubbleView) mFrame.getChildAt(i);
+                buble.setTypeOfRemove(BubbleView.TypeOfRemove.STOP);
+                buble.stop();
+            }
+        }
+    }
+
+    private void cleanFrame() {
+        for (int i = 0; i < mFrame.getChildCount(); i++) {
+            if (mFrame.getChildAt(i).getClass() == BubbleView.class) {
+                final BubbleView buble = (BubbleView) mFrame.getChildAt(i);
+                mFrame.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mFrame.removeView(buble);
+                    }
+                });
+
+            }
+        }
     }
 
     // BubbleView is a View that displays a bubble.
     // This class handles animating, drawing, and popping amongst other actions.
     // A new BubbleView is created for each bubble on the displa
-    enum Type{
-        MEN,WOMEN,BELIK
-    }
 
 
     // Do not modify below here

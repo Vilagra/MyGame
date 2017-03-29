@@ -4,9 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.media.SoundPool;
 import android.view.View;
-import android.widget.RelativeLayout;
 
 import java.util.Random;
 import java.util.concurrent.Executors;
@@ -19,19 +17,24 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class BubbleView extends View {
-    private BubbleActivity.Type type;
+    private Type type;
     private static final int BITMAP_SIZE = 64;
     private static final int REFRESH_RATE = 40;
     private final Paint mPainter = new Paint();
     private ScheduledFuture<?> mMoverFuture;
     private int mScaledBitmapWidth;
     private Bitmap mScaledBitmap;
-    boolean wasFlink;
+    private TypeOfRemove typeOfRemove;
     BubleViewListener bubleViewListener;
 
+    enum TypeOfRemove {FLINK,TOUCH,DOUBLETOUCH,MISSED,STOP}
+
+    public void setTypeOfRemove(TypeOfRemove typeOfRemove) {
+        this.typeOfRemove = typeOfRemove;
+    }
 
     interface BubleViewListener{
-        void removeView(BubbleView bubbleView,boolean wasFlink,boolean wasPopped);
+        void handleViewRomoving(BubbleView bubbleView, TypeOfRemove typeRemove);
 
     }
 
@@ -62,7 +65,7 @@ public class BubbleView extends View {
 
     }
 
-    public BubbleActivity.Type getType() {
+    public Type getType() {
         return type;
     }
 
@@ -84,13 +87,13 @@ public class BubbleView extends View {
         int rand = r.nextInt(8);
         switch (rand){
             case 0:
-                type= BubbleActivity.Type.MEN;
+                type= Type.BELIK;
                 break;
             case 1:case 2:case 3:case 4:
-                type= BubbleActivity.Type.MEN;
+                type= Type.MEN;
                 break;
             default:
-                type= BubbleActivity.Type.WOMEN;
+                type= Type.WOMEN;
                 break;
         }
         // TODO - create the scaled bitmap using size set above
@@ -112,7 +115,10 @@ public class BubbleView extends View {
                     BubbleView.this.postInvalidate();
                 } else {
                     BubbleView.this.postInvalidate();
-                    BubbleView.this.stop(false);
+                    if(typeOfRemove==null){
+                        typeOfRemove=TypeOfRemove.MISSED;
+                    }
+                    BubbleView.this.stop();
                 }
             }
         }, 0, REFRESH_RATE, TimeUnit.MILLISECONDS);
@@ -128,22 +134,22 @@ public class BubbleView extends View {
     }
 
     // Cancel the Bubble's movement
-    // Remove Bubble from mFrame
+    // TypeOfRemove Bubble from mFrame
     // Play pop sound if the BubbleView was popped
 
-    public void stop(final boolean wasPopped) {
+    public void stop() {
         if (null != mMoverFuture && !mMoverFuture.isDone()) {
             mMoverFuture.cancel(true);
         }
-
-        bubleViewListener.removeView(this,wasFlink,wasPopped);
+        if(typeOfRemove!=TypeOfRemove.STOP) {
+            bubleViewListener.handleViewRomoving(this, typeOfRemove);
+        }
         // This work will be performed on the UI Thread
 
     }
 
     // Change the Bubble's speed and direction
     public synchronized void deflect(float velocityX, float velocityY) {
-        wasFlink = true;
         mDx = velocityX / REFRESH_RATE;
         mDy = velocityY / REFRESH_RATE;
     }

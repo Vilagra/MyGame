@@ -1,4 +1,4 @@
-#Tue Mar 28 22:00:42 EEST 2017
+#Wed Mar 29 22:38:34 EEST 2017
 base.0=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
 renamed.0=classes.dex
 file.0=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex

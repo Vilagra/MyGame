@@ -5,4 +5,7 @@
     <string name="single_speed_mode_string">Single Speed Mode</string>
     <string name="random_speed_mode_string">Random Speed Mode</string>
     <string name="quit_string">Quit</string>
+    <string name="score">Score: </string>
+    <string name="missed">Missed: </string>
+    <string name="level">LEVEL: </string>
 </resources>

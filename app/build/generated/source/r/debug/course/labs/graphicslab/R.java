@@ -10,6 +10,9 @@ package course.labs.graphicslab;
 public final class R {
     public static final class attr {
     }
+    public static final class color {
+        public static final int yellow=0x7f060000;
+    }
     public static final class drawable {
         public static final int artur=0x7f020000;
         public static final int b64=0x7f020001;
@@ -24,31 +27,44 @@ public final class R {
         public static final int sveta=0x7f02000a;
     }
     public static final class id {
-        public static final int frame=0x7f070000;
-        public static final int level=0x7f070001;
-        public static final int menu_random_mode=0x7f070005;
-        public static final int menu_single_speed=0x7f070004;
-        public static final int menu_still_mode=0x7f070003;
-        public static final int quit=0x7f070006;
-        public static final int start=0x7f070002;
+        public static final int frame=0x7f090000;
+        public static final int level=0x7f090005;
+        public static final int menu_random_mode=0x7f090009;
+        public static final int menu_single_speed=0x7f090008;
+        public static final int menu_still_mode=0x7f090007;
+        public static final int missed1=0x7f090003;
+        public static final int missed2=0x7f090002;
+        public static final int missed3=0x7f090001;
+        public static final int quit=0x7f09000a;
+        public static final int score=0x7f090004;
+        public static final int start=0x7f090006;
     }
     public static final class layout {
-        public static final int main=0x7f030000;
+        public static final int main=0x7f040000;
     }
     public static final class menu {
-        public static final int menu=0x7f060000;
+        public static final int menu=0x7f080000;
+    }
+    public static final class mipmap {
+        public static final int ic_hurt=0x7f030000;
     }
     public static final class raw {
-        public static final int bubble_pop=0x7f040000;
-        public static final int osio=0x7f040001;
-        public static final int oyo=0x7f040002;
-        public static final int yohoo=0x7f040003;
+        public static final int bubble_pop=0x7f050000;
+        public static final int harosh=0x7f050001;
+        public static final int osio=0x7f050002;
+        public static final int oyo=0x7f050003;
+        public static final int suchka=0x7f050004;
+        public static final int uauauauaaa=0x7f050005;
+        public static final int yohoo=0x7f050006;
     }
     public static final class string {
-        public static final int app_name=0x7f050000;
-        public static final int quit_string=0x7f050001;
-        public static final int random_speed_mode_string=0x7f050002;
-        public static final int single_speed_mode_string=0x7f050003;
-        public static final int still_mode_string=0x7f050004;
+        public static final int app_name=0x7f070000;
+        public static final int level=0x7f070001;
+        public static final int missed=0x7f070002;
+        public static final int quit_string=0x7f070003;
+        public static final int random_speed_mode_string=0x7f070004;
+        public static final int score=0x7f070005;
+        public static final int single_speed_mode_string=0x7f070006;
+        public static final int still_mode_string=0x7f070007;
     }
 }
