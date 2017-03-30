@@ -8,16 +8,19 @@ import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -97,8 +100,6 @@ public class BubbleActivity extends Activity implements View.OnClickListener, Bu
                 .getStreamVolume(AudioManager.STREAM_MUSIC)
                 / mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         mSoundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
-
-
         mSoundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
 
             @Override
@@ -117,6 +118,8 @@ public class BubbleActivity extends Activity implements View.OnClickListener, Bu
     }
 
     private void updateView(){
+        mButton.setVisibility(View.VISIBLE);
+        levelTextView.setVisibility(View.VISIBLE);
         levelTextView.setText(stringForLevel + " "+logicOfGame.getCurrentLevel());
         scoreTextView.setText(stringForScore + " "+logicOfGame.getScore());
         imageView1.setVisibility(View.VISIBLE);
@@ -223,6 +226,10 @@ public class BubbleActivity extends Activity implements View.OnClickListener, Bu
     public void onClick(View v) {
         mButton.setVisibility(View.GONE);
         levelTextView.setVisibility(View.GONE);
+        genarateView();
+    }
+
+    public void genarateView(){
         ScheduledExecutorService executor = Executors
                 .newScheduledThreadPool(1);
         final Random r = new Random();
@@ -241,7 +248,7 @@ public class BubbleActivity extends Activity implements View.OnClickListener, Bu
                     }
                 });
             }
-        }, 0, 1000 - logicOfGame.speed, TimeUnit.MILLISECONDS);
+        }, 0, 1000 - logicOfGame.getSpeed(), TimeUnit.MILLISECONDS);
     }
 
     @Override
@@ -303,14 +310,14 @@ public class BubbleActivity extends Activity implements View.OnClickListener, Bu
         }
         stopView();
         if (logicOfGame.getResult() == LogicOfGame.Result.WIN) {
-            mSoundPool.play(mSoundWin, 0.5f, 0.5f, 0, 0, 1.0f);
             logicOfGame.resetForNextLevel();
             logicOfGame.increaseLevel();
-            mButton.setVisibility(View.VISIBLE);
-            levelTextView.setVisibility(View.VISIBLE);
-            levelTextView.setText(stringForLevel + " " + logicOfGame.getCurrentLevel());
+           // mButton.setVisibility(View.VISIBLE);
+            //levelTextView.setVisibility(View.VISIBLE);
+            //levelTextView.setText(stringForLevel + " " + logicOfGame.getCurrentLevel());
             cleanFrame();
             updateView();
+            mSoundPool.play(mSoundWin, 0.5f, 0.5f, 0, 0, 1.0f);
         }
         if (logicOfGame.getResult() == LogicOfGame.Result.LOSE) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -320,8 +327,6 @@ public class BubbleActivity extends Activity implements View.OnClickListener, Bu
                         public void onDismiss(DialogInterface dialog) {
                             cleanFrame();
                             logicOfGame.resetForNewGame();
-                            mButton.setVisibility(View.VISIBLE);
-                            levelTextView.setVisibility(View.VISIBLE);
                             updateView();
                         }
                     }).
@@ -331,8 +336,8 @@ public class BubbleActivity extends Activity implements View.OnClickListener, Bu
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     });
-            mSoundPool.play(mSoundLoose, 0.5f, 0.5f, 0, 0, 1.0f);
             builder.create().show();
+            mSoundPool.play(mSoundLoose, 0.5f, 0.5f, 0, 0, 1.0f);
         }
     }
 
@@ -343,6 +348,18 @@ public class BubbleActivity extends Activity implements View.OnClickListener, Bu
                 final BubbleView buble = (BubbleView) mFrame.getChildAt(i);
                 buble.setTypeOfRemove(BubbleView.TypeOfRemove.STOP);
                 buble.stop();
+            }
+        }
+    }
+
+
+    private void startView() {
+        for (int i = 0; i < mFrame.getChildCount(); i++) {
+            //int j = mFrame.getChildCount();
+            if (mFrame.getChildAt(i).getClass() == BubbleView.class) {
+                final BubbleView buble = (BubbleView) mFrame.getChildAt(i);
+                buble.setTypeOfRemove(null);
+                buble.start();
             }
         }
     }
@@ -383,27 +400,51 @@ public class BubbleActivity extends Activity implements View.OnClickListener, Bu
         return true;
     }
 
-/*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_still_mode:
-                speedMode = STILL;
-                return true;
-            case R.id.menu_single_speed:
-                speedMode = SINGLE;
-                return true;
-            case R.id.menu_random_mode:
-                speedMode = RANDOM;
-                return true;
-            case R.id.quit:
-                exitRequested();
+                stopGame();
+                showDialog();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-*/
+
+    private void showDialog(){
+        final Dialog d = new Dialog(this);
+        d.setTitle("NumberPicker");
+        d.setContentView(R.layout.level_picker);
+        final NumberPicker np = (NumberPicker) d.findViewById(R.id.numberPicker1);
+        np.setMaxValue(20);
+        np.setMinValue(0);
+        np.setWrapSelectorWheel(false);
+        Button b1 = (Button) d.findViewById(R.id.button1);
+        Button b2 = (Button) d.findViewById(R.id.button2);
+        b1.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                logicOfGame.setCurrentLevel(np.getValue());
+                cleanFrame();
+                logicOfGame.resetForNextLevel();
+                updateView();
+                d.dismiss();
+            }
+        });
+        b2.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                startView();
+                genarateView();
+                d.dismiss();
+            }
+        });
+        d.show();
+
+    }
 
     private void exitRequested() {
         super.onBackPressed();

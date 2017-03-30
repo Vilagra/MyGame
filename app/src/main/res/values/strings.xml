@@ -8,4 +8,5 @@
     <string name="score">Score: </string>
     <string name="missed">Missed: </string>
     <string name="level">LEVEL: </string>
+    <string name="chooselevel">Choose level</string>
 </resources>

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="yellow">#ffff00</color>
+    <color name="purple">#8805A8</color>
+    <color name="yellow">#E2FA00</color>
     <string name="app_name">GraphicsLab</string>
+    <string name="chooselevel">Choose level</string>
     <string name="level">LEVEL: </string>
     <string name="missed">Missed: </string>
     <string name="quit_string">Quit</string>

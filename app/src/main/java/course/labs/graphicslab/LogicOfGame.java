@@ -24,7 +24,6 @@ public class LogicOfGame {
     public void resetForNewGame(){
         resetForNextLevel();
         currentLevel=1;
-        speed=0;
     }
 
     public void resetForNextLevel(){
@@ -34,7 +33,10 @@ public class LogicOfGame {
     }
     public void increaseLevel(){
         currentLevel++;
-        speed+=50;
+    }
+
+    public int getSpeed() {
+        return (currentLevel-1)*50;
     }
 
     public void increaseScore(int i){

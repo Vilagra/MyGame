@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Wed Mar 29 22:38:35 EEST 2017
+#Thu Mar 30 17:38:48 EEST 2017
 25.file=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\raw\\oyo.3gpp
 25.base=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_
 22.set=ANDROID_RESOURCE
@@ -9,7 +9,7 @@
 14.file=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\drawable-nodpi-v4\\roman.jpg
 14.base=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_
 16.set=ANDROID_RESOURCE
-count=28
+count=29
 6.file=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\drawable-nodpi-v4\\artur.jpg
 6.base=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_
 26.file=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\layout\\main.xml
@@ -45,7 +45,9 @@ count=28
 25.set=ANDROID_RESOURCE
 17.base=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_
 10.file=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\mipmap-hdpi-v4\\ic_hurt.png
+28.file=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\layout\\level_picker.xml
 10.base=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_
+28.base=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_
 14.set=ANDROID_RESOURCE
 2.file=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\drawable-xhdpi-v4\\ic_launcher.png
 2.base=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_
@@ -79,6 +81,7 @@ count=28
 9.set=ANDROID_RESOURCE
 24.base=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_
 12.set=ANDROID_RESOURCE
+28.set=ANDROID_RESOURCE
 17.set=ANDROID_RESOURCE
 13.file=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\mipmap-xhdpi-v4\\ic_hurt.png
 13.base=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_
