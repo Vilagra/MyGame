@@ -84,7 +84,7 @@ public class BubbleView extends View {
 
     private void createScaledBitmap(Random r) {
         mScaledBitmapWidth = BITMAP_SIZE * (r.nextInt(2) + 2);
-        int rand = r.nextInt(8);
+        int rand = r.nextInt(9);
         switch (rand){
             case 0:
                 type= Type.BELIK;

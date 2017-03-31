@@ -23,9 +23,10 @@ public final class R {
         public static final int jana=0x7f020005;
         public static final int lena=0x7f020006;
         public static final int levenko=0x7f020007;
-        public static final int oleg=0x7f020008;
-        public static final int roman=0x7f020009;
-        public static final int sveta=0x7f02000a;
+        public static final int natasha=0x7f020008;
+        public static final int oleg=0x7f020009;
+        public static final int roman=0x7f02000a;
+        public static final int sveta=0x7f02000b;
     }
     public static final class id {
         public static final int button1=0x7f090002;

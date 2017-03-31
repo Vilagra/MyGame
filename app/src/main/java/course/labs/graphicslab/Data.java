@@ -14,12 +14,13 @@ public class Data {
     static void initialize(Context ctx) {
         bitmaps[0] = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.belik);
         bitmaps[1] = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.roman);
-        bitmaps[2] = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.levenko);
+        bitmaps[2] = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.artur);
         bitmaps[3] = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.oleg);
         bitmaps[4] = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.djonni);
         bitmaps[5] = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.jana);
         bitmaps[6] = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.sveta);
         bitmaps[7] = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.lena);
+        bitmaps[8] = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.natasha);
     }
 
     public static int getmDisplayWidth() {

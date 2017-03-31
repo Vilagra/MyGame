@@ -335,7 +335,7 @@ public class BubbleActivity extends Activity implements View.OnClickListener, Bu
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                         }
-                    });
+                    }).setCancelable(false);
             builder.create().show();
             mSoundPool.play(mSoundLoose, 0.5f, 0.5f, 0, 0, 1.0f);
         }
@@ -414,11 +414,11 @@ public class BubbleActivity extends Activity implements View.OnClickListener, Bu
 
     private void showDialog(){
         final Dialog d = new Dialog(this);
-        d.setTitle("NumberPicker");
+        d.setTitle("LevelPicker");
         d.setContentView(R.layout.level_picker);
         final NumberPicker np = (NumberPicker) d.findViewById(R.id.numberPicker1);
         np.setMaxValue(20);
-        np.setMinValue(0);
+        np.setMinValue(1);
         np.setWrapSelectorWheel(false);
         Button b1 = (Button) d.findViewById(R.id.button1);
         Button b2 = (Button) d.findViewById(R.id.button2);
