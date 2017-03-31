@@ -113,7 +113,7 @@ public class BubbleActivity extends Activity implements View.OnClickListener, Bu
         mSoundFlink = mSoundPool.load(getApplicationContext(), R.raw.yohoo, 1);
         mSoundLoose = mSoundPool.load(getApplicationContext(), R.raw.uauauauaaa, 1);
         mSoundWin = mSoundPool.load(getApplicationContext(), R.raw.harosh, 1);
-        mSoundBelik = mSoundPool.load(getApplicationContext(), R.raw.suchka, 1);
+        mSoundBelik = mSoundPool.load(getApplicationContext(), R.raw.belik, 1);
 
     }
 
