@@ -24,12 +24,12 @@
         "source": "C:\\Project\\Check\\ModernArtUi2\\Lab7_GraphicsLab\\app\\src\\main\\res\\raw\\osio.3gpp"
     },
     {
-        "merged": "C:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\merged\\debug\\raw\\suchka.m4a",
-        "source": "C:\\Project\\Lab7_GraphicsLab\\app\\src\\main\\res\\raw\\suchka.m4a"
-    },
-    {
         "merged": "C:\\Project\\Check\\ModernArtUi2\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\merged\\debug\\raw\\oyo.3gpp",
         "source": "C:\\Project\\Check\\ModernArtUi2\\Lab7_GraphicsLab\\app\\src\\main\\res\\raw\\oyo.3gpp"
+    },
+    {
+        "merged": "C:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\merged\\debug\\raw\\belik.mp3",
+        "source": "C:\\Project\\Lab7_GraphicsLab\\app\\src\\main\\res\\raw\\belik.mp3"
     },
     {
         "merged": "C:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\merged\\debug\\raw\\harosh.amr",

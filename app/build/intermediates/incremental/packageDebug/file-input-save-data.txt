@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Fri Mar 31 14:34:16 EEST 2017
+#Fri Mar 31 17:48:33 EEST 2017
 25.file=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\drawable-nodpi-v4\\natasha.JPG
 25.base=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_
 22.set=ANDROID_RESOURCE
@@ -44,7 +44,7 @@ count=30
 17.file=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\drawable-nodpi-v4\\lena.jpg
 25.set=ANDROID_RESOURCE
 17.base=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_
-10.file=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\mipmap-hdpi-v4\\ic_hurt.png
+10.file=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\mipmap-xxxhdpi-v4\\ic_hurt.png
 28.file=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\drawable-nodpi-v4\\djonni.JPG
 10.base=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_
 28.base=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_
@@ -55,12 +55,12 @@ count=30
 22.base=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_
 0.set=ANDROID_RESOURCE
 19.set=ANDROID_RESOURCE
-9.file=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\raw\\suchka.m4a
+9.file=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\mipmap-hdpi-v4\\ic_hurt.png
 5.set=ANDROID_RESOURCE
 18.file=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_\\resources.arsc
 9.base=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_
 18.base=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_
-11.file=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\mipmap-xxxhdpi-v4\\ic_hurt.png
+11.file=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\raw\\belik.mp3
 29.file=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_\\res\\layout\\level_picker.xml
 11.base=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_
 29.base=C\:\\Project\\Lab7_GraphicsLab\\app\\build\\intermediates\\res\\resources-debug.ap_

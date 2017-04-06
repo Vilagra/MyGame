@@ -55,11 +55,11 @@ public final class R {
         public static final int ic_hurt=0x7f030000;
     }
     public static final class raw {
-        public static final int bubble_pop=0x7f050000;
-        public static final int harosh=0x7f050001;
-        public static final int osio=0x7f050002;
-        public static final int oyo=0x7f050003;
-        public static final int belik =0x7f050004;
+        public static final int belik=0x7f050000;
+        public static final int bubble_pop=0x7f050001;
+        public static final int harosh=0x7f050002;
+        public static final int osio=0x7f050003;
+        public static final int oyo=0x7f050004;
         public static final int uauauauaaa=0x7f050005;
         public static final int yohoo=0x7f050006;
     }
